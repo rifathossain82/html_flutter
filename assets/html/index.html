@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #bodyBg{
+            background-color: orange;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body id="bodyBg">
+<h1>This is a Heading1</h1>
+<h1>This is a Heading2</h1>
+<h1>This is a Heading3</h1>
+<h1>This is a Heading4</h1>
+<h1>This is a Heading5</h1>
+<p>Rifat Hossain (Flutter Expert).</p>
+
+<button type="button" onclick="submit()" style="width: 180px; height: 50px;">Submit</button>
+
+<script>
+        function submit() {
+            var bodyBg = document.getElementById("bodyBg")
+            bodyBg.setAttribute('style', 'background-color: red;')
+
+            //send message to flutter
+            JavascriptChannel.postMessage('Hello World in JavaScript.');
+        }
+
+        function ok() {
+            var bodyBg = document.getElementById("bodyBg")
+            bodyBg.setAttribute('style', 'background-color: orange;')
+        }
+
+</script>
+</body>
+
+</html>
