@@ -53,39 +53,44 @@ class _ShowHtmlByWebviewState extends State<ShowHtmlByWebview> {
       appBar: AppBar(
         title: Text('Show Html Code by Webview'),
       ),
-      body: WebViewPlus(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: 'assets/html/index.html',
-        onWebViewCreated: (controller) {
-          this.controller = controller;
+      body: Container(
+        height: 200,
+        width: 500,
+        child: WebViewPlus(
+          zoomEnabled: true,
+          javascriptMode: JavascriptMode.unrestricted,
+          initialUrl: 'assets/html/index.html',
+          onWebViewCreated: (controller) {
+            this.controller = controller;
 
-          //loadLocalHtml();
-        },
-        javascriptChannels: {
-          JavascriptChannel(
-              name: "JavascriptChannel",
-              onMessageReceived: (message) async {
-                print(message.message);
-                await showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: Text(
-                          message.message,
-                          style: TextStyle(fontSize: 22),
-                        ),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text('Ok'))
-                        ],
-                      );
-                    });
-                controller.webViewController.evaluateJavascript('ok()');
-              })
-        },
+            //loadLocalHtml();
+          },
+          javascriptChannels: {
+            JavascriptChannel(
+                name: "district",
+                onMessageReceived: (message) async {
+                  print(message.message);
+                  await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          content: Text(
+                            message.message,
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Ok'))
+                          ],
+                        );
+                      });
+                  controller.webViewController.evaluateJavascript('ok()');
+                })
+          },
+        ),
       ),
     );
   }
